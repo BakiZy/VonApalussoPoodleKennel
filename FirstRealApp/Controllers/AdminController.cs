@@ -16,11 +16,11 @@ namespace FirstRealApp.Controllers
 
     public class AdminController : ControllerBase
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
+       
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-        AppDbContext context;
+    
 
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
@@ -54,7 +54,8 @@ namespace FirstRealApp.Controllers
 
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                UserName = model.Username,
+                
 
 
             };
