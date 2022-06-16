@@ -102,6 +102,8 @@ namespace FirstRealApp.Controllers
 
         }
 
+       
+
         [AllowAnonymous]
         [HttpPost]
         [Route("register")]
@@ -189,7 +191,7 @@ namespace FirstRealApp.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "Admin")]
         [HttpGet]
         [Route("/find-user-by-name/{name}")]
 
