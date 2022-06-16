@@ -31,5 +31,19 @@ namespace FirstRealApp.Controllers
             return Ok(_poodlesRepository.GetAll().ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider));
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetPoodleById(int id)
+        {
+
+            var poodle = _poodlesRepository.GetById(id);
+
+            
+            if (poodle == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<PoodleDTO>(poodle));
+        }
+
     }
 }

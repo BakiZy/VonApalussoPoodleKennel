@@ -102,6 +102,10 @@ namespace FirstRealApp.Migrations
                         .IsRequired()
                         .HasColumnType("bit");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -118,6 +122,10 @@ namespace FirstRealApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PoodleColorId");
+
+                    b.HasIndex("PoodleSizeId");
+
                     b.ToTable("Poodles");
 
                     b.HasData(
@@ -126,6 +134,7 @@ namespace FirstRealApp.Migrations
                             Id = 1,
                             DateOfBirth = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "https://i.imgur.com/oWXLx57.jpeg",
                             Name = "Toy Love Story Don Juan",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -136,6 +145,7 @@ namespace FirstRealApp.Migrations
                             Id = 2,
                             DateOfBirth = new DateTime(2020, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = false,
+                            Image = "https://i.imgur.com/7RetPeR.jpg",
                             Name = "Cici",
                             PedigreeNumber = "JR 81231",
                             PoodleColorId = 5,
@@ -146,6 +156,7 @@ namespace FirstRealApp.Migrations
                             Id = 3,
                             DateOfBirth = new DateTime(2018, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "https://i.imgur.com/gHWcJsQ.jpeg",
                             Name = "Greta Garbo Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 5,
@@ -156,6 +167,7 @@ namespace FirstRealApp.Migrations
                             Id = 4,
                             DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "https://i.imgur.com/2jlGebh.jpeg",
                             Name = "Scarlet Rain  Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -165,7 +177,8 @@ namespace FirstRealApp.Migrations
                         {
                             Id = 5,
                             DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
+                            GeneticTests = false,
+                            Image = "https://i.imgur.com/nuBvd3X.jpeg",
                             Name = "Skyler Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -176,6 +189,7 @@ namespace FirstRealApp.Migrations
                             Id = 6,
                             DateOfBirth = new DateTime(2017, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "https://i.imgur.com/QnE8Brd.jpeg",
                             Name = "Loko Loko Crveni Mayestoso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 7,
@@ -194,14 +208,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleId");
-
-                    b.ToTable("Colors");
+                    b.ToTable("PoodleColors");
 
                     b.HasData(
                         new
@@ -252,14 +261,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleId");
-
-                    b.ToTable("Sizes");
+                    b.ToTable("PoodleSizes");
 
                     b.HasData(
                         new
@@ -417,18 +421,19 @@ namespace FirstRealApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleColor", b =>
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
                 {
-                    b.HasOne("FirstRealApp.Models.PoodleEntity.Poodle", null)
-                        .WithMany("PoodleColors")
-                        .HasForeignKey("PoodleId");
-                });
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleColor", "PoodleColor")
+                        .WithMany()
+                        .HasForeignKey("PoodleColorId");
 
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleSize", b =>
-                {
-                    b.HasOne("FirstRealApp.Models.PoodleEntity.Poodle", null)
-                        .WithMany("PoodleSizes")
-                        .HasForeignKey("PoodleId");
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleSize", "PoodleSize")
+                        .WithMany()
+                        .HasForeignKey("PoodleSizeId");
+
+                    b.Navigation("PoodleColor");
+
+                    b.Navigation("PoodleSize");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -480,13 +485,6 @@ namespace FirstRealApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
-                {
-                    b.Navigation("PoodleColors");
-
-                    b.Navigation("PoodleSizes");
                 });
 #pragma warning restore 612, 618
         }

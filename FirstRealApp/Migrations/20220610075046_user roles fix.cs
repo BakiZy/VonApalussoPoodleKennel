@@ -4,7 +4,7 @@
 
 namespace FirstRealApp.Migrations
 {
-    public partial class whyalwaysme : Migration
+    public partial class userrolesfix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

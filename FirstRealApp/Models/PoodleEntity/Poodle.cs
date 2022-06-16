@@ -22,12 +22,16 @@ namespace FirstRealApp.Models.PoodleEntity
         public string? PedigreeNumber { get; set; }
 
         public int? PoodleSizeId { get; set; }
-        public List<PoodleSize>? PoodleSizes { get; set; }
+        public PoodleSize? PoodleSize { get; set; }
 
         public int? PoodleColorId { get; set; }
-        public List<PoodleColor>? PoodleColors { get; set; }
+        public PoodleColor? PoodleColor { get; set; }
 
-     
+        public string Image { get; set; }
+
+
+
+
 
 
 

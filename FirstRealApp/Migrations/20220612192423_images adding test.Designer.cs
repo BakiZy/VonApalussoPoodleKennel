@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstRealApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220608203829_1st update in db poodles DOB")]
-    partial class _1stupdateindbpoodlesDOB
+    [Migration("20220612192423_images adding test")]
+    partial class imagesaddingtest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,10 @@ namespace FirstRealApp.Migrations
                         .IsRequired()
                         .HasColumnType("bit");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,6 +124,10 @@ namespace FirstRealApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PoodleColorId");
+
+                    b.HasIndex("PoodleSizeId");
+
                     b.ToTable("Poodles");
 
                     b.HasData(
@@ -128,6 +136,7 @@ namespace FirstRealApp.Migrations
                             Id = 1,
                             DateOfBirth = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "https://www.facebook.com/photo.php?fbid=10215740697750579&set=pb.1837427169.-2207520000..&type=3",
                             Name = "Toy Love Story Don Juan",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -138,6 +147,7 @@ namespace FirstRealApp.Migrations
                             Id = 2,
                             DateOfBirth = new DateTime(2020, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = false,
+                            Image = "test",
                             Name = "Cici",
                             PedigreeNumber = "JR 81231",
                             PoodleColorId = 5,
@@ -148,6 +158,7 @@ namespace FirstRealApp.Migrations
                             Id = 3,
                             DateOfBirth = new DateTime(2018, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "test",
                             Name = "Greta Garbo Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 5,
@@ -158,6 +169,7 @@ namespace FirstRealApp.Migrations
                             Id = 4,
                             DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "test3",
                             Name = "Scarlet Rain  Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -167,7 +179,8 @@ namespace FirstRealApp.Migrations
                         {
                             Id = 5,
                             DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
+                            GeneticTests = false,
+                            Image = "test22",
                             Name = "Skyler Von Apalusso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 6,
@@ -178,6 +191,7 @@ namespace FirstRealApp.Migrations
                             Id = 6,
                             DateOfBirth = new DateTime(2017, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneticTests = true,
+                            Image = "test123",
                             Name = "Loko Loko Crveni Mayestoso",
                             PedigreeNumber = "JR 70883",
                             PoodleColorId = 7,
@@ -196,14 +210,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleId");
-
-                    b.ToTable("Colors");
+                    b.ToTable("PoodleColors");
 
                     b.HasData(
                         new
@@ -254,14 +263,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleId");
-
-                    b.ToTable("Sizes");
+                    b.ToTable("PoodleSizes");
 
                     b.HasData(
                         new
@@ -419,18 +423,19 @@ namespace FirstRealApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleColor", b =>
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
                 {
-                    b.HasOne("FirstRealApp.Models.PoodleEntity.Poodle", null)
-                        .WithMany("PoodleColors")
-                        .HasForeignKey("PoodleId");
-                });
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleColor", "PoodleColor")
+                        .WithMany()
+                        .HasForeignKey("PoodleColorId");
 
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleSize", b =>
-                {
-                    b.HasOne("FirstRealApp.Models.PoodleEntity.Poodle", null)
-                        .WithMany("PoodleSizes")
-                        .HasForeignKey("PoodleId");
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleSize", "PoodleSize")
+                        .WithMany()
+                        .HasForeignKey("PoodleSizeId");
+
+                    b.Navigation("PoodleColor");
+
+                    b.Navigation("PoodleSize");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -482,13 +487,6 @@ namespace FirstRealApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
-                {
-                    b.Navigation("PoodleColors");
-
-                    b.Navigation("PoodleSizes");
                 });
 #pragma warning restore 612, 618
         }

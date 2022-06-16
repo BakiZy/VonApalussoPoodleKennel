@@ -4,7 +4,7 @@
 
 namespace FirstRealApp.Migrations
 {
-    public partial class _2ndtest : Migration
+    public partial class prepared : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

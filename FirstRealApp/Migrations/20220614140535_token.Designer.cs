@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstRealApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220608200939_test adding poodles DB")]
-    partial class testaddingpoodlesDB
+    [Migration("20220614140535_token")]
+    partial class token
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,117 @@ namespace FirstRealApp.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleColor", b =>
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("GeneticTests")
+                        .IsRequired()
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PedigreeNumber")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<int?>("PoodleColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PoodleSizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PoodleColorId");
+
+                    b.HasIndex("PoodleSizeId");
+
+                    b.ToTable("Poodles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = true,
+                            Image = "https://i.imgur.com/oWXLx57.jpeg",
+                            Name = "Toy Love Story Don Juan",
+                            PedigreeNumber = "JR 70883",
+                            PoodleColorId = 6,
+                            PoodleSizeId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(2020, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = false,
+                            Image = "https://i.imgur.com/7RetPeR.jpg",
+                            Name = "Cici",
+                            PedigreeNumber = "JR 81231",
+                            PoodleColorId = 5,
+                            PoodleSizeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateOfBirth = new DateTime(2018, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = true,
+                            Image = "https://i.imgur.com/gHWcJsQ.jpeg",
+                            Name = "Greta Garbo Von Apalusso",
+                            PedigreeNumber = "JR 70883",
+                            PoodleColorId = 5,
+                            PoodleSizeId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = true,
+                            Image = "https://i.imgur.com/2jlGebh.jpeg",
+                            Name = "Scarlet Rain  Von Apalusso",
+                            PedigreeNumber = "JR 70883",
+                            PoodleColorId = 6,
+                            PoodleSizeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = false,
+                            Image = "https://i.imgur.com/nuBvd3X.jpeg",
+                            Name = "Skyler Von Apalusso",
+                            PedigreeNumber = "JR 70883",
+                            PoodleColorId = 6,
+                            PoodleSizeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateOfBirth = new DateTime(2017, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneticTests = true,
+                            Image = "https://i.imgur.com/QnE8Brd.jpeg",
+                            Name = "Loko Loko Crveni Mayestoso",
+                            PedigreeNumber = "JR 70883",
+                            PoodleColorId = 7,
+                            PoodleSizeId = 1
+                        });
+                });
+
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleColor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,14 +210,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleModelId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleModelId");
-
-                    b.ToTable("Colors");
+                    b.ToTable("PoodleColors");
 
                     b.HasData(
                         new
@@ -147,103 +252,7 @@ namespace FirstRealApp.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("GeneticTests")
-                        .IsRequired()
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PedigreeNumber")
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
-                    b.Property<int?>("PoodleColorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PoodleSizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Poodles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfBirth = new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
-                            Name = "Toy Love Story Don Juan",
-                            PedigreeNumber = "JR 70883",
-                            PoodleColorId = 6,
-                            PoodleSizeId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfBirth = new DateTime(2020, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = false,
-                            Name = "Cici",
-                            PedigreeNumber = "JR 81231",
-                            PoodleColorId = 5,
-                            PoodleSizeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOfBirth = new DateTime(2018, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
-                            Name = "Greta Garbo Von Apalusso",
-                            PedigreeNumber = "JR 70883",
-                            PoodleColorId = 5,
-                            PoodleSizeId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
-                            Name = "Scarlet Rain  Von Apalusso",
-                            PedigreeNumber = "JR 70883",
-                            PoodleColorId = 6,
-                            PoodleSizeId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateOfBirth = new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
-                            Name = "Skyler Von Apalusso",
-                            PedigreeNumber = "JR 70883",
-                            PoodleColorId = 6,
-                            PoodleSizeId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DateOfBirth = new DateTime(2017, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneticTests = true,
-                            Name = "Loko Loko Crveni Mayestoso",
-                            PedigreeNumber = "JR 70883",
-                            PoodleColorId = 7,
-                            PoodleSizeId = 1
-                        });
-                });
-
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleSize", b =>
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.PoodleSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,14 +263,9 @@ namespace FirstRealApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PoodleModelId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PoodleModelId");
-
-                    b.ToTable("Sizes");
+                    b.ToTable("PoodleSizes");
 
                     b.HasData(
                         new
@@ -419,18 +423,19 @@ namespace FirstRealApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleColor", b =>
+            modelBuilder.Entity("FirstRealApp.Models.PoodleEntity.Poodle", b =>
                 {
-                    b.HasOne("FirstRealApp.Models.Poodle.PoodleModel", null)
-                        .WithMany("PoodleColors")
-                        .HasForeignKey("PoodleModelId");
-                });
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleColor", "PoodleColor")
+                        .WithMany()
+                        .HasForeignKey("PoodleColorId");
 
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleSize", b =>
-                {
-                    b.HasOne("FirstRealApp.Models.Poodle.PoodleModel", null)
-                        .WithMany("PoodleSizes")
-                        .HasForeignKey("PoodleModelId");
+                    b.HasOne("FirstRealApp.Models.PoodleEntity.PoodleSize", "PoodleSize")
+                        .WithMany()
+                        .HasForeignKey("PoodleSizeId");
+
+                    b.Navigation("PoodleColor");
+
+                    b.Navigation("PoodleSize");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -482,13 +487,6 @@ namespace FirstRealApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FirstRealApp.Models.Poodle.PoodleModel", b =>
-                {
-                    b.Navigation("PoodleColors");
-
-                    b.Navigation("PoodleSizes");
                 });
 #pragma warning restore 612, 618
         }

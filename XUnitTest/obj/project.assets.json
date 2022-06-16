@@ -8765,11 +8765,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\XUnitTest\\XUnitTest.csproj",
+      "projectUniqueName": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\XUnitTest\\XUnitTest.csproj",
       "projectName": "XUnitTest",
-      "projectPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\XUnitTest\\XUnitTest.csproj",
+      "projectPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\XUnitTest\\XUnitTest.csproj",
       "packagesPath": "C:\\Users\\milos\\.nuget\\packages\\",
-      "outputPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\XUnitTest\\obj\\",
+      "outputPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\XUnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\milos\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8786,8 +8786,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\FirstRealApp\\FirstRealApp.csproj": {
-              "projectPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\FirstRealApp\\FirstRealApp.csproj"
+            "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\FirstRealApp\\FirstRealApp.csproj": {
+              "projectPath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\FirstRealApp\\FirstRealApp.csproj"
             }
           }
         }

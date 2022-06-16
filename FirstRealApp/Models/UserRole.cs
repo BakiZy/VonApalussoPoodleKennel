@@ -1,6 +1,6 @@
 ﻿namespace FirstRealApp.Models
 {
-    public static class UserRoles
+    public static class UserRole
     {
         public const string Admin = "Admin";
 

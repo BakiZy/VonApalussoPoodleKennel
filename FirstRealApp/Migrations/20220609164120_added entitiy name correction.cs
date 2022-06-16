@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FirstRealApp.Migrations
 {
-    public partial class testuser : Migration
+    public partial class addedentitiynamecorrection : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,17 +49,29 @@ namespace FirstRealApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Poodles",
+                name: "PoodleColors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Size = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Poodles", x => x.Id);
+                    table.PrimaryKey("PK_PoodleColors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PoodleSizes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PoodleSizes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,6 +180,72 @@ namespace FirstRealApp.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Poodles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GeneticTests = table.Column<bool>(type: "bit", nullable: false),
+                    PedigreeNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    PoodleSizeId = table.Column<int>(type: "int", nullable: true),
+                    PoodleColorId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Poodles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Poodles_PoodleColors_PoodleColorId",
+                        column: x => x.PoodleColorId,
+                        principalTable: "PoodleColors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Poodles_PoodleSizes_PoodleSizeId",
+                        column: x => x.PoodleSizeId,
+                        principalTable: "PoodleSizes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "PoodleColors",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Black" },
+                    { 2, "White" },
+                    { 3, "Brown" },
+                    { 4, "Gray" },
+                    { 5, "Apricot" },
+                    { 6, "Red" },
+                    { 7, "Black and tan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PoodleSizes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Toy" },
+                    { 2, "Miniature" },
+                    { 3, "Medium" },
+                    { 4, "Standard" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Poodles",
+                columns: new[] { "Id", "DateOfBirth", "GeneticTests", "Name", "PedigreeNumber", "PoodleColorId", "PoodleSizeId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Toy Love Story Don Juan", "JR 70883", 6, 2 },
+                    { 2, new DateTime(2020, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Cici", "JR 81231", 5, 2 },
+                    { 3, new DateTime(2018, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Greta Garbo Von Apalusso", "JR 70883", 5, 2 },
+                    { 4, new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Scarlet Rain  Von Apalusso", "JR 70883", 6, 1 },
+                    { 5, new DateTime(2020, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "Skyler Von Apalusso", "JR 70883", 6, 2 },
+                    { 6, new DateTime(2017, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Loko Loko Crveni Mayestoso", "JR 70883", 7, 1 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -206,6 +284,16 @@ namespace FirstRealApp.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Poodles_PoodleColorId",
+                table: "Poodles",
+                column: "PoodleColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Poodles_PoodleSizeId",
+                table: "Poodles",
+                column: "PoodleSizeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -233,6 +321,12 @@ namespace FirstRealApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PoodleColors");
+
+            migrationBuilder.DropTable(
+                name: "PoodleSizes");
         }
     }
 }

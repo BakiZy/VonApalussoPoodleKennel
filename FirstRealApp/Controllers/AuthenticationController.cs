@@ -16,35 +16,35 @@ namespace FirstRealApp.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    
+
     public class AuthenticationController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        
+
 
 
         private readonly IConfiguration _configuration;
 
-      
-       
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager ,IConfiguration configuration, SignInManager<ApplicationUser> signInManager)
+
+
+        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             this.signInManager = signInManager;
-          
+
 
 
         }
-       
+
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public  IActionResult Login([FromBody] LoginDTO model)
+        public IActionResult Login([FromBody] LoginDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -55,19 +55,23 @@ namespace FirstRealApp.Controllers
             {
 
                 var userRoles = _userManager.GetRolesAsync(user).GetAwaiter().GetResult();
-               
+
 
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
-                   
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 
                 };
 
-               
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+
                 var token = GetToken(authClaims);
-               
+
 
                 return Ok(new TokenDTO()
                 {
@@ -92,6 +96,7 @@ namespace FirstRealApp.Controllers
                   expires: DateTime.Now.AddHours(1),   // token valid for 1 hours
                   claims: authClaims,
                   signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                  
               );
             return token;
 
@@ -100,13 +105,13 @@ namespace FirstRealApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("register")]
-        public  IActionResult Register([FromBody] RegisterDTO model)
+        public IActionResult Register([FromBody] RegisterDTO model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Registration parameters invalid.");
             }
-            
+
             var userExists = _userManager.FindByNameAsync(model.Username).GetAwaiter().GetResult();
             if (userExists != null)
             {
@@ -119,35 +124,33 @@ namespace FirstRealApp.Controllers
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
-                
+
 
             };
+
+
+
             var result = _userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
+
+            if (!_roleManager.RoleExistsAsync(UserRole.User).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(UserRole.User)).GetAwaiter().GetResult();
+            }
+
+            if (_roleManager.RoleExistsAsync(UserRole.User).GetAwaiter().GetResult())
+            {
+                _userManager.AddToRoleAsync(user, UserRole.User).GetAwaiter().GetResult();
+            }
 
             if (!result.Succeeded)
             {
                 return BadRequest("Validation failed! Please check user details and try again.");
             }
-
-            if (!_roleManager.RoleExistsAsync(UserRoles.User).GetAwaiter().GetResult())
-            {
-                _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-            }
-
-
-
-            if (_roleManager.RoleExistsAsync(UserRoles.User).GetAwaiter().GetResult())
-            {
-                _userManager.AddToRoleAsync(user, UserRoles.User).GetAwaiter().GetResult();
-            }
-
-
-
             return Ok();
         }
 
 
-        [Authorize]
+
         [HttpPost]
         [Route("change-password")]
         //change password endpoint
@@ -161,7 +164,7 @@ namespace FirstRealApp.Controllers
             {
                 return NotFound("user doesnt exist");
             }
-           
+
 
             var currentPassword = _userManager.CheckPasswordAsync(user, model.CurrentPassword).GetAwaiter().GetResult();
 
@@ -190,7 +193,7 @@ namespace FirstRealApp.Controllers
         [HttpGet]
         [Route("/find-user-by-name/{name}")]
 
-        public IActionResult ListIdentityUserByMail(string name)
+        public IActionResult ListRegisteredUserByName(string name)
         {
 
             var userByEmail = _userManager.FindByNameAsync(name).GetAwaiter().GetResult();
@@ -198,7 +201,8 @@ namespace FirstRealApp.Controllers
             return Ok(userByEmail);
         }
 
-      
+
+
 
 
 

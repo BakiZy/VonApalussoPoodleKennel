@@ -22,7 +22,9 @@
 
         public string? PoodleColorName{ get; set; }
 
-       
+        public string? Image { get; set; }
+
+        
 
     }
 }

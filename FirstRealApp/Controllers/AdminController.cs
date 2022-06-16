@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FirstRealApp.Controllers
 {
 
-    [Authorize(Roles ="Admin")]
-    
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
 
@@ -26,14 +25,13 @@ namespace FirstRealApp.Controllers
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
 
- 
+
             _roleManager = roleManager;
             _userManager = userManager;
             _configuration = configuration;
 
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("register-admin")]
 
@@ -68,27 +66,27 @@ namespace FirstRealApp.Controllers
                 return BadRequest("user creation failed");
             }
 
-            if (!_roleManager.RoleExistsAsync(UserRoles.Admin).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(UserRole.Admin).GetAwaiter().GetResult())
             {
-                _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                _roleManager.CreateAsync(new IdentityRole(UserRole.Admin)).GetAwaiter().GetResult();
 
             }
 
-            if (_roleManager.RoleExistsAsync(UserRoles.Admin).GetAwaiter().GetResult())
-            {
-                _userManager.AddToRoleAsync(user, UserRoles.Admin).GetAwaiter().GetResult();
-            }
 
-           
+
+            if (_roleManager.RoleExistsAsync(UserRole.Admin).GetAwaiter().GetResult())
+            {
+                _userManager.AddToRoleAsync(user, UserRole.Admin).GetAwaiter().GetResult();
+            }
 
             return Ok(result);
 
 
         }
 
-   
 
-        [Authorize(Roles = "Admin")]
+
+ 
         [HttpPost]
         [Route("create-role")]
         public IActionResult CreateRole([FromBody] CreateRoleDTO model)
@@ -108,7 +106,8 @@ namespace FirstRealApp.Controllers
             return Ok(result);
 
         }
-        [Authorize(Roles = "Admin")]
+        
+
         [HttpGet]
         [Route("allroles")]
         public IActionResult ListRoles()
@@ -119,74 +118,5 @@ namespace FirstRealApp.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
-        [HttpPut("{name}")]
-        public IActionResult EditRole(string name, EditRoleDTO model)
-        {
-
-            var role = _roleManager.FindByNameAsync(name).GetAwaiter().GetResult();
-
-            if (role.Id != model.Id)
-            {
-                BadRequest();
-            }
-            else
-            {
-                role.Name = model.RoleName;
-                var result = _roleManager.UpdateAsync(role).GetAwaiter().GetResult();
-
-                if (result.Succeeded)
-                {
-                    return Ok(result);
-                }
-            }
-
-         
-
-         
-            return Ok(model);
-
-        }
-
-
-        [Authorize(Roles = "Admin")]
-        [HttpGet("{id}")]
-        public IActionResult EditUsersInRole(string roleId)
-        {
-
-
-
-
-            var role = _roleManager.FindByIdAsync(roleId).GetAwaiter().GetResult();
-
-            if (role == null)
-            {
-                return BadRequest();
-            }
-
-            var model = new List<UserRoleDTO>();
-
-            foreach (var user in _userManager.Users)
-            {
-                var userRole = new UserRoleDTO
-                {
-                    UserId = user.Id,
-                    UserName = user.UserName,
-
-                };
-
-                if (_userManager.IsInRoleAsync(user, role.Name).GetAwaiter().GetResult())
-                {
-                    userRole.IsSelected = true;
-                }
-                else
-                {
-                    userRole.IsSelected = false;
-                }
-                model.Add(userRole);
-            }
-
-            return Ok(role);
-        }
     }
 }

@@ -47,9 +47,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-//builder.Services.AddAuthorization();
-
-
+builder.Services.AddAuthorization();
 
 
 

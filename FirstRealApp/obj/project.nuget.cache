@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1mkXPuHP/mk+mSbByEBLn659vD0v4mkdCvLBJ1kWW77YWBTqaYdz42gHa/3bZjIksiYv8/6bdnXR2DuQwsLcsw==",
+  "dgSpecHash": "lowzlnFHd3DikQQZD3yhC3sSb3oNRuGnKFWePF3wBGEMsQ0OyCn+YsPRYzZh9k4gkB4bJyI++Y00B0WKyiDCIg==",
   "success": true,
-  "projectFilePath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\FirstRealApp\\FirstRealApp\\FirstRealApp.csproj",
+  "projectFilePath": "F:\\Vezbanje codeZ\\c sharp\\New Stuff\\VonApalusso\\BackendSide\\FirstRealApp\\FirstRealApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\milos\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\milos\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
