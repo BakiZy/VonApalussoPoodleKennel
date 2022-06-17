@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Text;
 using FirstRealApp.Interfaces;
 using FirstRealApp.Repository;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -34,20 +35,28 @@ builder.Services.AddAuthentication(options =>
     //adding JWT bearer
 .AddJwtBearer(options =>
 {
+    
     options.SaveToken = true;
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
+ 
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidAudience = configuration["Jwt:Audience"],
         ValidIssuer = configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
+        
+        
     };
 });
 
-builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequiredAdminRole", policy => policy.RequireRole("Admin"));
+});
 
 
 
@@ -86,6 +95,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.MapControllers();
+//app.MapControllers();
+app.UseEndpoints(endpoints =>
+   {
+       endpoints.MapControllers();
+   });
 
 app.Run();

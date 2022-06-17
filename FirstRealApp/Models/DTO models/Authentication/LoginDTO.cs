@@ -8,8 +8,6 @@ namespace FirstRealApp.Models.DTO_models
         public string? Username { get; set; }
 
         [Required(ErrorMessage = "password is required")]
-        
-
         public string? Password { get; set; }
 
     }

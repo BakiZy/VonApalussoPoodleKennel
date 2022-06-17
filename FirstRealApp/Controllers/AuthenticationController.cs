@@ -56,10 +56,12 @@ namespace FirstRealApp.Controllers
 
                 var userRoles = _userManager.GetRolesAsync(user).GetAwaiter().GetResult();
 
+                
 
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
+
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 
                 };
@@ -96,13 +98,13 @@ namespace FirstRealApp.Controllers
                   expires: DateTime.Now.AddHours(1),   // token valid for 1 hours
                   claims: authClaims,
                   signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                  
+
               );
             return token;
 
         }
 
-       
+
 
         [AllowAnonymous]
         [HttpPost]
@@ -203,6 +205,7 @@ namespace FirstRealApp.Controllers
             return Ok(userByEmail);
         }
 
+       
 
 
 
