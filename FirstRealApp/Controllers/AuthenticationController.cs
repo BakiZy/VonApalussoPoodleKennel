@@ -56,7 +56,7 @@ namespace FirstRealApp.Controllers
 
                 var userRoles = _userManager.GetRolesAsync(user).GetAwaiter().GetResult();
 
-                
+
 
                 var authClaims = new List<Claim>
                 {
@@ -92,7 +92,9 @@ namespace FirstRealApp.Controllers
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
 
+           
             var token = new JwtSecurityToken(
+                 
                   issuer: _configuration["Jwt:Issuer"],
                   audience: _configuration["Jwt:Audience"],
                   expires: DateTime.Now.AddHours(1),   // token valid for 1 hours
@@ -155,6 +157,7 @@ namespace FirstRealApp.Controllers
 
 
 
+
         [HttpPost]
         [Route("change-password")]
         //change password endpoint
@@ -193,19 +196,14 @@ namespace FirstRealApp.Controllers
             return Ok(result);
         }
 
-        [Authorize(Policy = "Admin")]
-        [HttpGet]
-        [Route("/find-user-by-name/{name}")]
 
-        public IActionResult ListRegisteredUserByName(string name)
-        {
 
-            var userByEmail = _userManager.FindByNameAsync(name).GetAwaiter().GetResult();
 
-            return Ok(userByEmail);
-        }
 
-       
+
+
+
+
 
 
 

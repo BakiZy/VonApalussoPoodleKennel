@@ -29,26 +29,25 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-    
 
 
-    //adding JWT bearer
+
+//adding JWT bearer
 .AddJwtBearer(options =>
 {
-    
+
     options.SaveToken = true;
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
- 
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidAudience = configuration["Jwt:Audience"],
         ValidIssuer = configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
-        
-        
+
+
     };
 });
 
@@ -95,7 +94,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-//app.MapControllers();
+app.MapControllers();
 app.UseEndpoints(endpoints =>
    {
        endpoints.MapControllers();

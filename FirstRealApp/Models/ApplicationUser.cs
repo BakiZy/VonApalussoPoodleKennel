@@ -5,10 +5,8 @@ namespace FirstRealApp.Models
 {
     public class ApplicationUser : IdentityUser
     {
-  
 
-        
 
-       
+
     }
 }

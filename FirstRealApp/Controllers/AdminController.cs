@@ -16,11 +16,11 @@ namespace FirstRealApp.Controllers
 
     public class AdminController : ControllerBase
     {
-       
+
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-    
+
 
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
@@ -55,7 +55,7 @@ namespace FirstRealApp.Controllers
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username,
-                
+
 
 
             };
@@ -87,7 +87,7 @@ namespace FirstRealApp.Controllers
 
 
 
- 
+
         [HttpPost]
         [Route("create-role")]
         public IActionResult CreateRole([FromBody] CreateRoleDTO model)
@@ -107,7 +107,7 @@ namespace FirstRealApp.Controllers
             return Ok(result);
 
         }
-        
+
 
         [HttpGet]
         [Route("allroles")]
