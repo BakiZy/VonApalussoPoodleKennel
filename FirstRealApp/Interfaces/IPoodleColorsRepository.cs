@@ -7,6 +7,8 @@ namespace FirstRealApp.Interfaces
 
          IQueryable<PoodleColor> GetAllColors();
 
+         PoodleColor GetById(int id);
+
          void AddColor(PoodleColor color);
 
          void RemoveColor(PoodleColor color);

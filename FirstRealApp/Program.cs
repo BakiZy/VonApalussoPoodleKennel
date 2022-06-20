@@ -75,6 +75,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPoodlesRepository, PoodlesRepository>();
+builder.Services.AddScoped<IPoodleColorsRepository, PoodleColorsRepository>();
+builder.Services.AddScoped<IPoodleSizesRepository, PoodleSizesRepository>();
+builder.Services.AddScoped<IFilterRepository, FilterRepository>();
 builder.Services.AddAutoMapper(typeof(PoodleProfile));
 
 var app = builder.Build();

@@ -13,6 +13,8 @@ namespace FirstRealApp.Repository
         {
             _context = context;
         }
+        
+
         public void AddColor(PoodleColor color)
         {
             _context.PoodleColors.Add(color);
@@ -21,7 +23,12 @@ namespace FirstRealApp.Repository
 
         public IQueryable<PoodleColor> GetAllColors()
         {
-            return _context.PoodleColors.OrderBy(x => x.Name);
+            return _context.PoodleColors.OrderBy(x => x.Id);
+        }
+
+        public PoodleColor GetById(int id)
+        {
+            return _context.PoodleColors.FirstOrDefault(x => x.Id == id);
         }
 
         public void RemoveColor(PoodleColor color)
