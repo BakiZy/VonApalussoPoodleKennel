@@ -24,28 +24,63 @@ namespace FirstRealApp.Controllers
         [HttpGet]
         [Route("/api/filters/search-by-color")]
 
-        public IActionResult FilterPoodlesByColor([FromQuery] SearchPoodlesByColorDTO serachByColor )
+        public IActionResult FilterPoodlesByColor([FromQuery] PoodleNameFilterDTO serachByColor)
 
         {
+
             return Ok(_filterRepo.SearchPoodleByColor(serachByColor.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
         }
 
         [HttpGet]
         [Route("/api/filters/search-by-size")]
-        public IActionResult FilterPoodlesBySize([FromQuery] SearchPoodlesBySizeDTO searchPoodlesBySizeDTO)
+        public IActionResult FilterPoodlesBySize([FromQuery] PoodleNameFilterDTO searchPoodlesBySize)
         {
-            return Ok(_filterRepo.SearchPoodleBySize(searchPoodlesBySizeDTO.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
+
+            return Ok(_filterRepo.SearchPoodleBySize(searchPoodlesBySize.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
 
 
         }
 
         [HttpGet]
-        [Route("/api/filters/search-by-name")]
+        [Route("/api/filters/search-by-name/")]
 
-        public IActionResult FilterPoodleByName([FromQuery] SearchPoodlesByNameDTO searchPoodlesByNameDTO)
+        public IActionResult FilterPoodleByName([FromQuery] PoodleNameFilterDTO searchPoodlesByName)
         {
-            return Ok(_filterRepo.SearchPoodleByName(searchPoodlesByNameDTO.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
+            if (string.IsNullOrEmpty(searchPoodlesByName.Name)) 
+            {
+                return Ok(_filterRepo.GetAll().ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider));
+            }
+          
+            return Ok(_filterRepo.SearchPoodleByName(searchPoodlesByName.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
         }
+
+        [HttpGet]
+        [Route("/api/filters/filterall")]
+
+        public IActionResult Filter([FromQuery] FilterPoodleDTO filter )
+        {
+            if (filter.ColorName == null && filter.SizeName == null)
+            {
+                return Ok(_filterRepo.GetAll().ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider));
+            }
+
+            if (filter.ColorName == null && filter.SizeName != null)
+            {
+                return Ok(_filterRepo.SearchPoodleBySize(filter.SizeName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
+            }
+
+            if (filter.SizeName == null && filter.ColorName != null)
+            {
+                return Ok(_filterRepo.SearchPoodleByColor(filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
+
+            }
+
+            return Ok (_filterRepo.Filter(filter.SizeName, filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
+
+
+        }
+
+
 
 
 

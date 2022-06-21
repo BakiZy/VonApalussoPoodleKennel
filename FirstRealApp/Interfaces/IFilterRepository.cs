@@ -10,5 +10,9 @@ namespace FirstRealApp.Interfaces
         public IQueryable<Poodle> SearchPoodleBySize(string size);
 
         public IQueryable<Poodle> SearchPoodleByName(string name);
+
+        public IQueryable<Poodle> Filter( string size, string color);
+
+        public IQueryable<Poodle> GetAll();
     }
 }

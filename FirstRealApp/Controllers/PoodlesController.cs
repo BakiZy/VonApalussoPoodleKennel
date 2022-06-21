@@ -16,14 +16,24 @@ namespace FirstRealApp.Controllers
     public class PoodlesController : ControllerBase
     {
         private readonly IPoodlesRepository _poodlesRepository;
+        private readonly IPoodleSizesRepository _poodleSizesRepository;
         private readonly IMapper _mapper;
 
-        public PoodlesController(IPoodlesRepository poodlesRepository, IMapper mapper)
+        public PoodlesController(IPoodlesRepository poodlesRepository, IPoodleSizesRepository poodleSizesRepository,  IMapper mapper)
         {
+            _poodleSizesRepository = poodleSizesRepository;
             _poodlesRepository = poodlesRepository;
             _mapper = mapper;
         }
 
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("/api/poodles/list-sizes")]
+        public IActionResult GetAllPoodleSizes()
+        {
+            return Ok(_poodleSizesRepository.GetAllSizes());
+        }
         [HttpGet]
         [AllowAnonymous]
         public IActionResult GetAllPoodles()
