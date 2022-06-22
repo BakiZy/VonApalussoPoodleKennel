@@ -45,17 +45,6 @@ namespace FirstRealApp.Repository
             return _context.Poodles.OrderBy(x => x.DateOfBirth);
         }
 
-  /*      public IQueryable<Poodle> FilterColorAndSize(string size, st)
-        {
-            if (filter.PoodleColor == null && filter.PoodleSize == null)
-            {
-                return GetAll();
-            }
-
-            return _context.Poodles.Where(x => x.Name == filter.PoodleColor.Name);
-
-        }*/
-
 
     }
 }

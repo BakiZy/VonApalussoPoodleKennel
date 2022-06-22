@@ -26,6 +26,8 @@ namespace FirstRealApp.Controllers
             _mapper = mapper;
         }
 
+        
+        
 
         [HttpGet]
         [AllowAnonymous]
@@ -88,7 +90,11 @@ namespace FirstRealApp.Controllers
         }
 
 
-        
+       
+
+
+
+
 
     }
 }
