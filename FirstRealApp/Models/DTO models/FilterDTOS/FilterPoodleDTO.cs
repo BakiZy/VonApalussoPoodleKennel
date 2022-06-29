@@ -6,5 +6,7 @@
         public string? SizeName { get; set; }
 
         public string? ColorName { get; set; }
+
+        public string? Name { get; set; }
     }
 }

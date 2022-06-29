@@ -15,19 +15,19 @@ namespace FirstRealApp.Repository
         }
 
 
-        public IQueryable<Poodle> SearchPoodleByColor(string color)
+        public IQueryable<Poodle> FilterPoodleByColor(string color)
         {
             return _context.Poodles.Where(x => x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
 
         }
 
-        public IQueryable<Poodle> SearchPoodleByName(string name)
+        public IQueryable<Poodle> FilterPoodleByName(string name)
         {
 
             return _context.Poodles.Where(x => x.Name.Contains(name)).OrderByDescending(x => x.DateOfBirth);
         }
 
-        public IQueryable<Poodle> SearchPoodleBySize(string size)
+        public IQueryable<Poodle> FilterPoodleBySize(string size)
         {
 
 
@@ -35,9 +35,24 @@ namespace FirstRealApp.Repository
 
         }
 
-        public IQueryable<Poodle> Filter(string size, string color)
+        public IQueryable<Poodle> FilterSizeAndColor(string size, string color)
         {
             return _context.Poodles.Where(x => x.PoodleSize.Name == size && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
+        }
+
+        public IQueryable<Poodle> FilterAll(string size, string color, string name)
+        {
+            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleSize.Name == size && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
+        }
+
+        public IQueryable<Poodle>FilterNameAndSize(string name, string size)
+        {
+            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleSize.Name ==size).OrderByDescending(x => x.DateOfBirth);
+        }
+
+        public IQueryable<Poodle> FilterNameAndColor(string name, string color)
+        {
+            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
         }
 
         public IQueryable<Poodle> GetAll()

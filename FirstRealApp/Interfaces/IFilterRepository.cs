@@ -5,14 +5,23 @@ namespace FirstRealApp.Interfaces
     public interface IFilterRepository
     {
 
-        public IQueryable<Poodle> SearchPoodleByColor(string color);
+        public IQueryable<Poodle> FilterPoodleByColor(string color);
 
-        public IQueryable<Poodle> SearchPoodleBySize(string size);
+        public IQueryable<Poodle> FilterPoodleBySize(string size);
 
-        public IQueryable<Poodle> SearchPoodleByName(string name);
+        public IQueryable<Poodle> FilterPoodleByName(string name);
 
-        public IQueryable<Poodle> Filter( string size, string color);
+        public IQueryable<Poodle> FilterSizeAndColor(string size, string color);
+
+        public IQueryable<Poodle> FilterAll(string size, string color, string name);
+
+        public IQueryable<Poodle> FilterNameAndColor(string name, string color);
+
+        public IQueryable<Poodle> FilterNameAndSize(string name, string size);
+
 
         public IQueryable<Poodle> GetAll();
+
+
     }
 }
