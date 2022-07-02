@@ -66,6 +66,14 @@
               "target": "Package",
               "version": "[6.0.5, )"
             },
+            "SqlKata": {
+              "target": "Package",
+              "version": "[2.3.7, )"
+            },
+            "SqlKata.Execution": {
+              "target": "Package",
+              "version": "[2.3.7, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

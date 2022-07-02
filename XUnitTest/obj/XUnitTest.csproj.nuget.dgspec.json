@@ -66,6 +66,14 @@
               "target": "Package",
               "version": "[6.0.5, )"
             },
+            "SqlKata": {
+              "target": "Package",
+              "version": "[2.3.7, )"
+            },
+            "SqlKata.Execution": {
+              "target": "Package",
+              "version": "[2.3.7, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -140,6 +148,14 @@
             "Moq": {
               "target": "Package",
               "version": "[4.18.1, )"
+            },
+            "SqlKata": {
+              "target": "Package",
+              "version": "[2.3.7, )"
+            },
+            "SqlKata.Execution": {
+              "target": "Package",
+              "version": "[2.3.7, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

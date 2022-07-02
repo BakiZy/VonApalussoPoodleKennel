@@ -1,4 +1,5 @@
-﻿using FirstRealApp.Models.PoodleEntity;
+﻿using FirstRealApp.Models.DTO_models.FilterDTOS;
+using FirstRealApp.Models.PoodleEntity;
 
 namespace FirstRealApp.Interfaces
 {
@@ -13,11 +14,13 @@ namespace FirstRealApp.Interfaces
 
         public IQueryable<Poodle> FilterSizeAndColor(string size, string color);
 
-        public IQueryable<Poodle> FilterAll(string size, string color, string name);
-
         public IQueryable<Poodle> FilterNameAndColor(string name, string color);
 
         public IQueryable<Poodle> FilterNameAndSize(string name, string size);
+
+        public IQueryable<Poodle> FilterAll(string size, string color, string name);
+
+
 
 
         public IQueryable<Poodle> GetAll();

@@ -304,3 +304,13 @@ F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\obj\Debug\
 F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\obj\Debug\net6.0\XUnitTest.pdb
 F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\obj\Debug\net6.0\XUnitTest.genruntimeconfig.cache
 F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\obj\Debug\net6.0\ref\XUnitTest.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\Dapper.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\Humanizer.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\SqlKata.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\SqlKata.Execution.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
+F:\Vezbanje codeZ\c sharp\New Stuff\VonApalusso\BackendSide\XUnitTest\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll
