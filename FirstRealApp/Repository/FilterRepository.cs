@@ -4,7 +4,7 @@ using FirstRealApp.Models.DTO_models.FilterDTOS;
 using FirstRealApp.Models.DTO_models.PoodleDTos;
 using FirstRealApp.Models.PoodleEntity;
 using System.Data.SqlClient;
-using System.Linq;                      
+using System.Linq;
 
 namespace FirstRealApp.Repository
 {
@@ -12,9 +12,18 @@ namespace FirstRealApp.Repository
     {
         private readonly AppDbContext _context;
 
+
         public FilterRepository(AppDbContext context)
         {
             _context = context;
+        }
+
+        private IQueryable<Poodle> Template()
+        {
+            var poodles = _context.Poodles;
+            var colors = _context.PoodleColors;
+            IQueryable<Poodle> query;
+            return query = from p in poodles join c in colors on p.PoodleColorId equals c.Id select p;
         }
 
 
@@ -40,24 +49,30 @@ namespace FirstRealApp.Repository
 
         public IQueryable<Poodle> FilterSizeAndColor(string size, string color)
         {
-            return _context.Poodles.Where(x => x.PoodleSize.Name == size && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
-        }
-        
-        public IQueryable<Poodle> FilterAll(string size, string color, string name)
-        {
-            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleSize.Name == size && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
+            var query = Template();
+
+            if (!string.IsNullOrEmpty(size) && !string.IsNullOrEmpty(color))
+            {
+                return query.Where(x => x.PoodleSize.Name.Equals(size) && x.PoodleColor.Name.Equals(color));
+            }
+
+            if (!string.IsNullOrEmpty(size))
+            {
+                return query.Where(x => x.PoodleSize.Name.Equals(size));
+
+            }
+
+            if (!string.IsNullOrEmpty(color))
+            {
+                return query.Where(x => x.PoodleColor.Name.Equals(color));
+            }
+
+            else return query;
         }
 
-        public IQueryable<Poodle> FilterNameAndSize(string name, string size)
-        {
-            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleSize.Name == size).OrderByDescending(x => x.DateOfBirth);
-        }
+      
 
-        public IQueryable<Poodle> FilterNameAndColor(string name, string color)
-        {
 
-            return _context.Poodles.Where(x => x.Name.Contains(name) && x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
-        }
 
         public IQueryable<Poodle> GetAll()
         {

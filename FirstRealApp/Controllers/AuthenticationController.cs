@@ -92,12 +92,12 @@ namespace FirstRealApp.Controllers
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
 
-           
+
             var token = new JwtSecurityToken(
-                 
+
                   issuer: _configuration["Jwt:Issuer"],
                   audience: _configuration["Jwt:Audience"],
-                  expires: DateTime.Now.AddHours(1),   // token valid for 1 hours
+                  expires: DateTime.Now.AddMinutes(30),
                   claims: authClaims,
                   signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
 
@@ -195,6 +195,8 @@ namespace FirstRealApp.Controllers
 
             return Ok(result);
         }
+
+      
 
 
 

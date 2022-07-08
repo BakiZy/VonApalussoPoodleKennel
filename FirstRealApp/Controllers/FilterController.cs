@@ -41,13 +41,7 @@ namespace FirstRealApp.Controllers
 
         }
 
-        [HttpGet]
-        [Route("/api/filters/by-color-and-name")]
-
-        public IActionResult FilterByColorAndName([FromQuery] FilterPoodleDTO filterPoodleDTO)
-        {
-            return Ok(_filterRepo.FilterNameAndColor(filterPoodleDTO.ColorName, filterPoodleDTO.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-        }
+      
 
 
         [HttpGet]
@@ -73,65 +67,7 @@ namespace FirstRealApp.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/api/filters/filterall")]
-
-        public IActionResult Filter([FromQuery] FilterPoodleDTO filter)
-        {
-
-            // all nulls return full list
-            if (filter.ColorName == null && filter.SizeName == null && string.IsNullOrEmpty(filter.Name))
-            {
-                return Ok(_filterRepo.GetAll().ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider));
-            }
-
-            //all nulls but size, return by size
-            if (filter.ColorName == null && filter.SizeName != null && string.IsNullOrEmpty(filter.Name))
-            {
-                return Ok(_filterRepo.FilterPoodleBySize(filter.SizeName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-
-            //all nulls but color return by color
-            if (filter.SizeName == null && filter.ColorName != null && string.IsNullOrEmpty(filter.Name))
-            {
-                return Ok(_filterRepo.FilterPoodleByColor(filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-            //all nulls but name 
-            if (!string.IsNullOrEmpty(filter.Name) && filter.ColorName == null && filter.SizeName == null)
-            {
-                return Ok(_filterRepo.FilterPoodleByName(filter.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-
-            //filter by color and size, name null
-            if (string.IsNullOrEmpty(filter.Name) && filter.ColorName != null && filter.SizeName != null)
-            {
-
-                return Ok(_filterRepo.FilterSizeAndColor(filter.SizeName, filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-            //filter all
-            if (!string.IsNullOrEmpty(filter.Name) && filter.ColorName != null && filter.SizeName != null)
-            {
-                return Ok(_filterRepo.FilterAll(filter.SizeName, filter.ColorName, filter.Name).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-
-            //filter by name and color 
-            if (!string.IsNullOrEmpty(filter.Name) && filter.ColorName != null && filter.SizeName == null)
-            {
-
-                return Ok(_filterRepo.FilterNameAndColor(filter.Name, filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-
-            }
-            //filter by name and size
-
-
-            if (!string.IsNullOrEmpty(filter.Name) && filter.ColorName == null && filter.SizeName != null)
-            {
-                return Ok(_filterRepo.FilterNameAndSize(filter.Name, filter.SizeName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
-            }
-
-            return BadRequest();
-
-        }
+       
     }
 
 
