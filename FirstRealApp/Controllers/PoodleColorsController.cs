@@ -36,7 +36,7 @@ namespace FirstRealApp.Controllers
         }
        
         [HttpGet]
-
+        [Route("/api/poodles/list-colors")]
         public IActionResult GetAllColors()
         {
             return Ok(_poodleColorsRepository.GetAllColors());

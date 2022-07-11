@@ -56,7 +56,7 @@ namespace FirstRealApp.Models
                 
                 );
 
-                
+
 
 
             base.OnModelCreating(builder);

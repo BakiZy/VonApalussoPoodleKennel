@@ -70,7 +70,7 @@ namespace FirstRealApp.Controllers
 
             _poodlesRepository.Add(poodle);
 
-            return CreatedAtAction("GetPoodleById", new { id = poodle.Id });
+            return CreatedAtAction("GetPoodleById", new { id = poodle.Id }, poodle);
 
         }
 
