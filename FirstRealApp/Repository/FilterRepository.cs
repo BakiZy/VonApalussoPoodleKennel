@@ -53,18 +53,18 @@ namespace FirstRealApp.Repository
 
             if (!string.IsNullOrEmpty(size) && !string.IsNullOrEmpty(color))
             {
-                return query.Where(x => x.PoodleSize.Name.Equals(size) && x.PoodleColor.Name.Equals(color));
+                return query.Where(x => x.PoodleSize.Name.Equals(size) && x.PoodleColor.Name.Equals(color)).OrderByDescending(x => x.DateOfBirth);
             }
 
             if (!string.IsNullOrEmpty(size))
             {
-                return query.Where(x => x.PoodleSize.Name.Equals(size));
+                return query.Where(x => x.PoodleSize.Name.Equals(size)).OrderByDescending( x => x.DateOfBirth);
 
             }
 
             if (!string.IsNullOrEmpty(color))
             {
-                return query.Where(x => x.PoodleColor.Name.Equals(color));
+                return query.Where(x => x.PoodleColor.Name.Equals(color)).OrderByDescending(x => x.DateOfBirth);
             }
 
             else return query;
