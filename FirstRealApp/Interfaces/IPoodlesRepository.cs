@@ -6,6 +6,8 @@ namespace FirstRealApp.Interfaces
     {
         public IQueryable<Poodle> GetAll();
 
+        public IQueryable<PoodleSize> GetAllSizes();
+
         Poodle GetById(int id);
 
         Poodle GetByName(string name);
@@ -15,6 +17,8 @@ namespace FirstRealApp.Interfaces
         void Update(Poodle poodle);
 
         void Delete(Poodle poodle);
+
+        
 
 
     }

@@ -117,6 +117,14 @@ namespace FirstRealApp.Controllers
             return Ok(roles);
         }
 
+        [HttpGet]
+        [Route("list-users")]
+        public IActionResult ListAllUsers()
+        {
+            var users = _userManager.Users;
+            return Ok(users);
+        }
+
 
 
     }

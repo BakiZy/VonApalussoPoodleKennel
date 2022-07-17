@@ -16,12 +16,12 @@ namespace FirstRealApp.Controllers
     public class PoodlesController : ControllerBase
     {
         private readonly IPoodlesRepository _poodlesRepository;
-        private readonly IPoodleSizesRepository _poodleSizesRepository;
+        //private readonly IPoodleSizesRepository _poodleSizesRepository;
         private readonly IMapper _mapper;
 
-        public PoodlesController(IPoodlesRepository poodlesRepository, IPoodleSizesRepository poodleSizesRepository,  IMapper mapper)
+        public PoodlesController(IPoodlesRepository poodlesRepository,  IMapper mapper)
         {
-            _poodleSizesRepository = poodleSizesRepository;
+            
             _poodlesRepository = poodlesRepository;
             _mapper = mapper;
         }
@@ -34,7 +34,7 @@ namespace FirstRealApp.Controllers
         [Route("/api/poodles/list-sizes")]
         public IActionResult GetAllPoodleSizes()
         {
-            return Ok(_poodleSizesRepository.GetAllSizes());
+            return Ok(_poodlesRepository.GetAllSizes());
         }
         [HttpGet]
         [AllowAnonymous]
@@ -87,6 +87,33 @@ namespace FirstRealApp.Controllers
 
             _poodlesRepository.Delete(poodle);
             return NoContent();
+        }
+
+        [HttpPut("{id}")]
+
+        public IActionResult UpdatePoodle(int id, Poodle poodle)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (id != poodle.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _poodlesRepository.Update(poodle);
+            }
+
+            catch
+            {
+                return BadRequest();
+            }
+
+            return Ok(poodle);
         }
 
 

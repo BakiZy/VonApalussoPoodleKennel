@@ -9,10 +9,18 @@ namespace FirstRealApp.Repository
     {
         private readonly AppDbContext? _context;
 
+
+      
         public PoodlesRepository(AppDbContext context)
         {
             _context = context;
         }
+
+        public IQueryable<PoodleSize> GetAllSizes()
+        {
+            return _context.PoodleSizes.OrderBy(x => x.Id);
+        }
+
         public void Add(Poodle poodle)
         {
             _context.Poodles.Add(poodle);

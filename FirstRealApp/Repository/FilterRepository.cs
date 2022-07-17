@@ -5,6 +5,7 @@ using FirstRealApp.Models.DTO_models.PoodleDTos;
 using FirstRealApp.Models.PoodleEntity;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstRealApp.Repository
 {
@@ -29,8 +30,9 @@ namespace FirstRealApp.Repository
 
         public IQueryable<Poodle> FilterPoodleByColor(string color)
         {
-            return _context.Poodles.Where(x => x.PoodleColor.Name == color).OrderByDescending(x => x.DateOfBirth);
-
+           
+           
+           return  _context.Poodles.Include(x => x.PoodleColor).Where(x => x.PoodleColor.Name.Equals(color));
         }
 
         public IQueryable<Poodle> FilterPoodleByName(string name)
@@ -58,7 +60,7 @@ namespace FirstRealApp.Repository
 
             if (!string.IsNullOrEmpty(size))
             {
-                return query.Where(x => x.PoodleSize.Name.Equals(size)).OrderByDescending( x => x.DateOfBirth);
+                return query.Where(x => x.PoodleSize.Name.Equals(size)).OrderByDescending(x => x.DateOfBirth);
 
             }
 
@@ -68,6 +70,12 @@ namespace FirstRealApp.Repository
             }
 
             else return query;
+
+
+
+
+
+
         }
 
       
