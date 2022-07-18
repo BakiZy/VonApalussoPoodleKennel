@@ -35,7 +35,7 @@ namespace FirstRealApp.Repository
 
         public IQueryable<Poodle> GetAll()
         {
-           return _context.Poodles.OrderBy(x => x.DateOfBirth).AsQueryable();
+           return _context.Poodles.OrderBy(x => x.Id);
         }
 
         public Poodle GetById(int id)

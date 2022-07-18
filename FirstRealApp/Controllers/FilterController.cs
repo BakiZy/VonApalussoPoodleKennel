@@ -45,7 +45,7 @@ namespace FirstRealApp.Controllers
         [HttpGet]
         [Route("/api/filters/color-and-size")]
 
-        public IActionResult FilterColorAndSize([FromQuery] FilterPoodleDTO filter)
+        public IActionResult FilterSizeAndCollor([FromQuery] FilterPoodleDTO filter)
         {
             return Ok(_filterRepo.FilterSizeAndColor(filter.SizeName, filter.ColorName).ProjectTo<PoodleDTO>(_mapper.ConfigurationProvider).ToList());
         }

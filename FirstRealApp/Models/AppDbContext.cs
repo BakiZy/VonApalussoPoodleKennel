@@ -48,11 +48,11 @@ namespace FirstRealApp.Models
 
             builder.Entity<Poodle>().HasData(
                 new Poodle() { Id = 1, Name = "Toy Love Story Don Juan", DateOfBirth = new DateTime(2020, 2, 1), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 6, PoodleSizeId = 2, Image = "https://i.imgur.com/oWXLx57.jpeg" },
-                new Poodle() { Id = 2, Name = "Cici", DateOfBirth = new DateTime(2020, 11, 14), GeneticTests = false, PedigreeNumber = "JR 81231", PoodleColorId = 5, PoodleSizeId = 2, Image = "https://i.imgur.com/7RetPeR.jpg" },
-                new Poodle() { Id = 3, Name = "Greta Garbo Von Apalusso", DateOfBirth = new DateTime(2018, 11, 4), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 5, PoodleSizeId = 2, Image = "https://i.imgur.com/gHWcJsQ.jpeg" },
-                new Poodle() { Id = 4, Name = "Scarlet Rain  Von Apalusso", DateOfBirth = new DateTime(2020, 11, 3), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 6, PoodleSizeId = 1, Image = "https://i.imgur.com/6Ll5PQL.jpeg" },
-                new Poodle() { Id = 5, Name = "Skyler Von Apalusso", DateOfBirth = new DateTime(2020, 11, 3), GeneticTests = false, PedigreeNumber = "JR 70883", PoodleColorId = 6, PoodleSizeId = 2, Image = "https://i.imgur.com/nuBvd3X.jpeg" },
-                new Poodle() { Id = 6, Name = "Loko Loko Crveni Mayestoso", DateOfBirth = new DateTime(2017, 05, 13), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 7, PoodleSizeId = 1, Image = "https://i.imgur.com/QnE8Brd.jpeg" }
+                new Poodle() { Id = 6, Name = "Cici", DateOfBirth = new DateTime(2020, 11, 14), GeneticTests = false, PedigreeNumber = "JR 81231", PoodleColorId = 5, PoodleSizeId = 2, Image = "https://i.imgur.com/7RetPeR.jpg" },
+                new Poodle() { Id = 5, Name = "Greta Garbo Von Apalusso", DateOfBirth = new DateTime(2018, 11, 4), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 5, PoodleSizeId = 2, Image = "https://i.imgur.com/gHWcJsQ.jpeg" },
+                new Poodle() { Id = 2, Name = "Scarlet Rain  Von Apalusso", DateOfBirth = new DateTime(2020, 11, 3), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 6, PoodleSizeId = 1, Image = "https://i.imgur.com/6Ll5PQL.jpeg" },
+                new Poodle() { Id = 4, Name = "Skyler Von Apalusso", DateOfBirth = new DateTime(2020, 11, 3), GeneticTests = false, PedigreeNumber = "JR 70883", PoodleColorId = 6, PoodleSizeId = 2, Image = "https://i.imgur.com/nuBvd3X.jpeg" },
+                new Poodle() { Id = 3, Name = "Loko Loko Crveni Mayestoso", DateOfBirth = new DateTime(2017, 05, 13), GeneticTests = true, PedigreeNumber = "JR 70883", PoodleColorId = 7, PoodleSizeId = 1, Image = "https://i.imgur.com/QnE8Brd.jpeg" }
 
                 );
 
