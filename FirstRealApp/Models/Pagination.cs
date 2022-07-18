@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace FirstRealApp.Models
 {
+    //template pagination
     public class Pagination<T> : List<T>
     {
         public int PageIndex { get; set; }

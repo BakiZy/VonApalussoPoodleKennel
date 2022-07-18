@@ -34,7 +34,7 @@ namespace FirstRealApp.Controllers
 
         [HttpPost]
         [Route("register-admin")]
-
+        //endpoint for registering admin role only 
         public IActionResult RegisterAdmin([FromBody] RegisterDTO model)
         {
             if (!ModelState.IsValid)

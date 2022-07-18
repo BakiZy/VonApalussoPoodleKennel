@@ -41,8 +41,6 @@ namespace FirstRealApp.Controllers
 
         }
 
-      
-
 
         [HttpGet]
         [Route("/api/filters/color-and-size")]
@@ -67,7 +65,7 @@ namespace FirstRealApp.Controllers
         }
 
 
-       
+
     }
 
 

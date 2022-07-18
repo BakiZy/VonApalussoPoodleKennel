@@ -30,9 +30,9 @@ namespace FirstRealApp.Repository
 
         public IQueryable<Poodle> FilterPoodleByColor(string color)
         {
-           
-           
-           return  _context.Poodles.Include(x => x.PoodleColor).Where(x => x.PoodleColor.Name.Equals(color));
+
+
+            return _context.Poodles.Include(x => x.PoodleColor).Where(x => x.PoodleColor.Name.Equals(color));
         }
 
         public IQueryable<Poodle> FilterPoodleByName(string name)
@@ -74,11 +74,9 @@ namespace FirstRealApp.Repository
 
 
 
-
-
         }
 
-      
+
 
 
 

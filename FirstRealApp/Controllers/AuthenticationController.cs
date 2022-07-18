@@ -111,6 +111,7 @@ namespace FirstRealApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("register")]
+        //registering normal user
         public IActionResult Register([FromBody] RegisterDTO model)
         {
             if (!ModelState.IsValid)
