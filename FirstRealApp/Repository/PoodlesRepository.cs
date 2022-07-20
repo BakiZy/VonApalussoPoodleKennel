@@ -40,7 +40,7 @@ namespace FirstRealApp.Repository
 
         public Poodle GetById(int id)
         {
-            return _context.Poodles.FirstOrDefault(x => x.Id == id);
+            return _context.Poodles.Include(x => x.PoodleColor).FirstOrDefault(x => x.Id == id);
         }
 
         public Poodle GetByName(string name)

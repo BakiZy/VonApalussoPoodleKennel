@@ -106,6 +106,7 @@ builder.Services.AddScoped<IPoodleColorsRepository, PoodleColorsRepository>();
 builder.Services.AddScoped<IFilterRepository, FilterRepository>();
 builder.Services.AddAutoMapper(typeof(PoodleProfile));
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

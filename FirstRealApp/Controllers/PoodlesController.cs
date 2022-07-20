@@ -16,7 +16,6 @@ namespace FirstRealApp.Controllers
     public class PoodlesController : ControllerBase
     {
         private readonly IPoodlesRepository _poodlesRepository;
-        //private readonly IPoodleSizesRepository _poodleSizesRepository;
         private readonly IMapper _mapper;
 
         public PoodlesController(IPoodlesRepository poodlesRepository,  IMapper mapper)
@@ -49,14 +48,16 @@ namespace FirstRealApp.Controllers
         public IActionResult GetPoodleById(int id)
         {
 
-            var poodle = _poodlesRepository.GetById(id);
+            Poodle poodle = _poodlesRepository.GetById(id);
 
 
             if (poodle == null)
             {
                 return NotFound();
             }
-            return Ok(_mapper.Map<PoodleDTO>(poodle));
+            PoodleDTO poodleDTO = _mapper.Map<PoodleDTO>(poodle);
+
+            return Ok(poodleDTO);
         }
 
         [HttpPost]

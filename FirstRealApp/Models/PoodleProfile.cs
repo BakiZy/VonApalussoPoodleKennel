@@ -9,6 +9,9 @@ namespace FirstRealApp.Models
         public PoodleProfile()
         {
             CreateMap<Poodle, PoodleDTO>();
+           
+
+
         }
     }
 }

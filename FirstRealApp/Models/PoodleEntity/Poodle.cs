@@ -7,7 +7,7 @@ namespace FirstRealApp.Models.PoodleEntity
         public int Id { get; set; }
 
         [Required]
-       // [RegularExpression("[a-zA-ZČĆĐŠŽžšđćč-]")]
+        [RegularExpression("[a-zA-ZČĆĐŠŽžšđćč-]")]
         public string? Name { get; set; }
 
         [Required]
